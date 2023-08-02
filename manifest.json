@@ -1,0 +1,32 @@
+{
+  "name": "Cookie cracker",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "Bloquea cookies no esenciales",
+  "icons": {
+    "128": "/icons/cookie.png"
+  },
+  "permissions": [
+    "cookies",
+    "scripting",
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/icons/cookie.png",
+      "32": "/icons/cookie.png",
+      "48": "/icons/cookie.png",
+      "128": "/icons/cookie.png"
+    }
+  }
+}
