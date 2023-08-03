@@ -1,27 +1,42 @@
-function checkTypeDidomeModal() {
-    if(document.getElementById('didomi-popup')){
-        console.log('La página puede contener un popup en el medio"');
-        return 'didomi-popup';
-    }else if(document.getElementById('didomi-notice')){
-        console.log('La página puede contener un popup arriba o abajo');
-        return 'didomi-notice';
-    }
+function checkConfigurationOptions(){
+    console.log("Se quieren rechazar todas las cookies")
 }
-function configurateCookies(typeModal) {
-    console.log(typeModal);
-    if(document.getElementById('didomi-notice-agree-button')){
-        var acceptAllButton = document.getElementById('didomi-notice-agree-button');
-        acceptAllButton.click();
+function configurateCookies(privacyApli) {
+    switch (privacyApli) {
+        case "didomi":
+            if(option == "accept" && document.getElementById('didomi-notice-agree-button')){
+                document.getElementById('didomi-notice-agree-button').click();
+                console.log('Se han aeptado todas las cookies'); 
+            }else if(option == "denyAll"){
+                checkConfigurationOptions();
+            }
+            break;
+        case "onetrust":
+            if(option == "accept" && document.getElementById('onetrust-accept-btn-handler')){
+                document.getElementById('onetrust-accept-btn-handler').click();
+                console.log('Se han aeptado todas las cookies'); 
+            }else if(option == "denyAll"){
+                checkConfigurationOptions();
+            }
+            break;    
+        default:
+            break;
     }
+    
 }
 function checkForCookiePrefencesElement() {
     // Verificamos si la página contiene un elemento con el ID "didomi-host"
     if (document.getElementById('didomi-host')) {
-      var TypeDidodmeModal = checkTypeDidomeModal(); 
-      configurateCookies(TypeDidodmeModal);
+      console.log('Se ha detectado el uso de el gestor de privacidad DIDOMI');  
+      configurateCookies("didomi",option);
+    }else if(document.getElementById('onetrust-consent-sdk')){
+        console.log('Se ha detectado el uso de el gestor de privacidad ONETRUST');  
+      configurateCookies("onetrust",option);  
+    }else{
+
     }
   }
   
-
-  checkForCookiePrefencesElement();
+  var option = "accept";
+  checkForCookiePrefencesElement(option);
   
