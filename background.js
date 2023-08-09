@@ -7,6 +7,11 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     });
   }
 });
+var option = "denyAll";
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  console.log("BACKGROUND.JS");
+  sendResponse(option);
+});
 
 
 

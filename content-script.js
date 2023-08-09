@@ -1,22 +1,24 @@
+
+
 function checkConfigurationOptions(){
     console.log("Se quieren rechazar todas las cookies")
 }
 function configurateCookies(privacyApli) {
     switch (privacyApli) {
         case "didomi":
-            if(option == "accept" && document.getElementById('didomi-notice-agree-button')){
+            if(preferences == "acceptAll" && document.getElementById('didomi-notice-agree-button')){
                 document.getElementById('didomi-notice-agree-button').click();
                 console.log('Se han aeptado todas las cookies'); 
-            }else if(option == "denyAll" && document.getElementById('didomi-notice-learn-more-button')){
+            }else if(preferences == "denyAll" && document.getElementById('didomi-notice-learn-more-button')){
                 document.getElementById('didomi-notice-learn-more-button').click();
                 checkConfigurationOptions();
             }
             break;
         case "onetrust":
-            if(option == "accept" && document.getElementById('onetrust-accept-btn-handler')){
+            if(preferences == "acceptAll" && document.getElementById('onetrust-accept-btn-handler')){
                 document.getElementById('onetrust-accept-btn-handler').click();
                 console.log('Se han aceptado todas las cookies'); 
-            }else if(option == "denyAll" && document.getElementById('onetrust-pc-btn-handler')){
+            }else if(preferences == "denyAll" && document.getElementById('onetrust-pc-btn-handler')){
                 document.getElementById('onetrust-pc-btn-handler').click();
                 checkConfigurationOptions();
             }
@@ -26,28 +28,31 @@ function configurateCookies(privacyApli) {
     }
     
 }
-function checkForCookiePrefencesElement() {
+function checkForCookiePrefencesElement(preferences) {
     // Verificamos si la página contiene un elemento con el ID "didomi-host"
     if (document.getElementById('didomi-host')) {
       console.log('Se ha detectado el uso de el gestor de privacidad DIDOMI');  
-      configurateCookies("didomi",option);
+      configurateCookies("didomi",preferences);
     }else if(document.getElementById('onetrust-consent-sdk')){
       console.log('Se ha detectado el uso de el gestor de privacidad ONETRUST');  
-      configurateCookies("onetrust",option);  
+      configurateCookies("onetrust",preferences);  
     }else{
 
     }
 }
 
-    chrome.runtime.sendMessage({ message: "getAcceptedStatus" }, function (response) {
-        console.log('Se va a solicitar el valor');
-        const accepted = response.accepted;
-        console.log("Valor recibido desde popup.js:", accepted);
 
-        var option = accepted ? "accept" : "denyAll";
-        checkForCookiePrefencesElement(option);
+var preferences = "";
+function checkForCookiePreferences(){
+    chrome.storage.sync.get("accepted", function (data) {
+        console.log("Value currently is " + data.accepted);
+        preferences = data.accepted;
+        console.log("The preference value is "+ preferences);
+        checkForCookiePrefencesElement(preferences);
     });
+    
+}
 
+checkForCookiePreferences();
 
-  checkForCookiePrefencesElement(option);
   
