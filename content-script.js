@@ -21,8 +21,6 @@ async function checkConfigurationOptions(privacyApli){
         switch(privacyApli) {
             case "didomi":
                  clickElementWithClassName(['didomi-components-button didomi-button didomi-button-standard standard-button']);
-                 clickElementWithClassName(['didomi-components-button didomi-button didomi-button-standard standard-button']);
-                 clickElementWithClassName(['didomi-components-button didomi-button didomi-button-standard standard-button']);
                 break;
             case "onetrust":
                 if(document.getElementsByClassName('ot-pc-refuse-all-handler')){
