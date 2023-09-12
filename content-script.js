@@ -38,7 +38,9 @@ async function checkConfigurationOptions(privacyApli){
             case "onetrust":
                 if(document.getElementsByClassName('save-preference-btn-handler onetrust-close-btn-handler') !== undefined){
                     console.log('save-preference-btn-handler onetrust-close-btn-handler');
-                    clickElementWithClassName(['save-preference-btn-handler onetrust-close-btn-handler']);
+                    setTimeout(() => {
+                      clickElementWithClassName(['save-preference-btn-handler onetrust-close-btn-handler']);
+                    }, 1000);
                     console.log("Se le ha dado al boton de guardar preferencias");
                 }
                 break;
