@@ -116,14 +116,16 @@ function clickElementWithClassName(className) {
     
 }
 
-//-------------- FUNCIONES DE LA EXTENSIÓN Y RELACIONADAS CON SU COMPORTAMIENTO --------------------------------------------
+//-------------- FUNCIONES DE LA EXTENSIÓN Y RELACIONADAS CON SU COMPORTAMIENTO ---------------------------------------------------------------
 async function checkConfigurationOptions(privacyApli){
         switch(privacyApli) {
             case "didomi":
               if(document.getElementsByClassName('didomi-components-button didomi-button didomi-button-standard standard-button') !== undefined){
                 console.log(document.getElementsByClassName('didomi-components-button didomi-button didomi-button-standard standard-button')[0]);
-                clickElementWithClassName(['didomi-components-button didomi-button didomi-button-standard standard-button']);
-                
+                setTimeout(() => {
+                  clickElementWithClassName(['didomi-components-button didomi-button didomi-button-standard standard-button']);
+                }, 1000);
+                console.log("Se le ha dado al boton de guardar preferencias");
               } 
               break;
             case "onetrust":
@@ -140,7 +142,7 @@ async function checkConfigurationOptions(privacyApli){
         }
         
 }
-async function configurateCookies(privacyApli) {
+async function configurateCookies(privacyApli, preferences) {
     switch (privacyApli) {
         case "didomi":
             if(preferences == "acceptAll" ){
@@ -181,8 +183,6 @@ async function checkForCookiePrefencesElement(preferences) {
     }else if(document.getElementById('onetrust-consent-sdk')){
       console.log('Se ha detectado el uso de el gestor de privacidad ONETRUST');  
       await configurateCookies("onetrust",preferences);  
-    }else{
-
     }
 }
 
