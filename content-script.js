@@ -1,23 +1,11 @@
-//----------------- DEFINICIÓN DE CONSTANTES (PENDIENTES DE USAR PARA OPTIMIZAR EL CÓDIGO) ---------------------------
-const ONETRUST_HOST_NAME = "onetrust";
-const ONETRUST_ROOT_HOST = 'onetrust-consent-sdk';
-const ONETRUST_ACCPETALL = 'onetrust-accept-btn-handler';
-const ONETRUST_DENYALL = 'onetrust-reject-all-handler';
-const ONETRUST_CONFIGURATE = 'onetrust-pc-btn-handler';
-const ONETRUST_SAVE_PREFERENCES = 'save-preference-btn-handler onetrust-close-btn-handler';
 
 
-const DIDOMI_HOST_NAME = "didomi";
-const DIDOMI_ROOT_HOST = 'didomi-host';
-const DIDOMI_ACCEPT_ALL  = 'didomi-notice-agree-button';
-const DIDOMI_CONFIGURATE  = 'didomi-notice-learn-more-button';
-const DIDOMI_SAVE_PREFERENCES = 'didomi-components-button didomi-button didomi-button-standard standard-button';
 
 //------------------ FUNCIONES QUE SE UTILIZAN (AJENAS A LA EXTENSION)------------------------------------------------------
 async function waitForElementById(elementId) {
   console.log(`Esperando el elemento con el ID '${elementId}'`);
   return new Promise((resolve) => {
-    const observer = new MutationObserver((mutationsList) => {
+    const observer = new MutationObserver(() => {
       const targetElement = document.getElementById(elementId);
       console.log(targetElement);
       if (targetElement) {
@@ -34,7 +22,7 @@ async function waitForElementById(elementId) {
 }
 async function waitForElementByClass(elementClass) {
   return new Promise((resolve) => {
-    const observer = new MutationObserver((mutationsList) => {
+    const observer = new MutationObserver(() => {
       const targetElement = document.getElementsByClassName(elementClass);
       if (targetElement) {
         observer.disconnect();
@@ -50,8 +38,7 @@ async function waitForElementByClass(elementClass) {
 async function waitForElementsById(elementIds) {
   console.log('vamos a entrar en la promesa de esperar por el id');
     return new Promise((resolve) => {
-      const observer = new MutationObserver((mutationsList) => {
-        for (const mutation of mutationsList) {
+      const observer = new MutationObserver(() => {
           for (const elementId of elementIds) {
             const targetElement = document.getElementById(elementId);
             if (targetElement) {
@@ -61,7 +48,6 @@ async function waitForElementsById(elementIds) {
               console.log('Se esta esperando');
             }
           }
-        }
       });
   
       observer.observe(document, { childList: true, subtree: true });
@@ -70,8 +56,7 @@ async function waitForElementsById(elementIds) {
 
   async function waitForElementsByClass(elementClasses) {
     return new Promise((resolve) => {
-      const observer = new MutationObserver((mutationsList) => {
-        for (const mutation of mutationsList) {
+      const observer = new MutationObserver(() => {
           for (const elementClass of elementClasses) {
             const targetElements = document.getElementsByClassName(elementClass);
             if (targetElements) {
@@ -81,7 +66,6 @@ async function waitForElementsById(elementIds) {
               console.log('Se esta esperando');
             }
           }
-        }
       });
       observer.observe(document, { childList: true, subtree: true });
     });
@@ -176,7 +160,7 @@ async function configurateCookies(privacyApli, preferences) {
     }
     
 }
-async function checkForCookiePrefencesElement(preferences) {
+async function checkForCookiePrefencesElement(preferences) { //esto migrado
     if (document.getElementById('didomi-host')) {
       console.log('Se ha detectado el uso de el gestor de privacidad DIDOMI');  
       await configurateCookies("didomi",preferences);
@@ -187,21 +171,39 @@ async function checkForCookiePrefencesElement(preferences) {
 }
 
 
-var preferences = "";
-async function checkForCookiePreferences(){
-    chrome.storage.sync.get("accepted", async function (data) {
-        console.log("Value currently is " + data.accepted);
-        preferences = data.accepted;
-        console.log("The preference value is "+ preferences);
-        await checkForCookiePrefencesElement(preferences);
-    });
-  }
 
+async function getCookiePreferences(){
+    chrome.storage.sync.get("accepted", async function (data) {
+        console.log("The preference value is "+ data.accepted);
+        //await checkForCookiePrefencesElement(preferences);
+        return data.accepted;
+    });
+}
+
+function getPrivacyManager(handlersArray){
+  
+    handlersArray.forEach(element => {
+        if(element.canHandlerSite()){
+          return element;
+        }
+    });
+}
 //------------------------ INICIO ----------------------------------------------------------------
-waitForElementsById(['didomi-host', 'onetrust-consent-sdk'])
+
+this.handlersObj = new SetUp();
+this.handlersArray = handlersObj.getAllHandlers();
+this.handlersRootNames = handlersObj.getAllRootNames();
+
+//TIENES QUE SOLUCIONAAR LO DE PODER LLMAR A PREFERENCES Y HALDER EPR VA DE LOKOS
+
+waitForElementsById(handlersRootNames)
     .then(async () => {
-      console.log("Los elementos han aparecido. Ejecutando comandos...");
-      await checkForCookiePreferences();
+      console.log("1");
+      this.preferences = await getCookiePreferences();
+      console.log("2");
+      this.handler = getPrivacyManager(handlersArray);
+      console.log("3");
+      this.console.log(this.preferences, this.handler)
     })
     .catch((error) => {
       console.error("Error:", error);
