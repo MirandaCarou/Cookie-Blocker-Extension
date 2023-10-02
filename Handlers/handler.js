@@ -12,6 +12,9 @@ class Handler {
     getRootName(){
         return this.rootName;
     }
+    getHostName(){
+        return this.hostName;
+    }
     canHandlerSite(){
         if(document.getElementById(this.rootName)){
             return true;

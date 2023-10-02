@@ -1,6 +1,5 @@
 
 
-
 //------------------ FUNCIONES QUE SE UTILIZAN (AJENAS A LA EXTENSION)------------------------------------------------------
 async function waitForElementById(elementId) {
   console.log(`Esperando el elemento con el ID '${elementId}'`);
@@ -36,7 +35,6 @@ async function waitForElementByClass(elementClass) {
 }
 
 async function waitForElementsById(elementIds) {
-  console.log('vamos a entrar en la promesa de esperar por el id');
     return new Promise((resolve) => {
       const observer = new MutationObserver(() => {
           for (const elementId of elementIds) {
@@ -44,8 +42,6 @@ async function waitForElementsById(elementIds) {
             if (targetElement) {
               observer.disconnect();
               resolve();
-            }else{
-              console.log('Se esta esperando');
             }
           }
       });
@@ -127,6 +123,10 @@ async function checkConfigurationOptions(privacyApli){
         
 }
 async function configurateCookies(privacyApli, preferences) {
+  console.log("-------------CONFIGURATE COOKIES --------------");
+  console.log(privacyApli);
+  console.log(preferences);
+  console.log("-----------------------------------------------");
     switch (privacyApli) {
         case "didomi":
             if(preferences == "acceptAll" ){
@@ -175,39 +175,46 @@ async function checkForCookiePrefencesElement(preferences) { //esto migrado
 async function getCookiePreferences(){
     chrome.storage.sync.get("accepted", async function (data) {
         console.log("The preference value is "+ data.accepted);
-        //await checkForCookiePrefencesElement(preferences);
-        return data.accepted;
+        preferences = data.accepted;
     });
 }
 
-function getPrivacyManager(handlersArray){
-  
-    handlersArray.forEach(element => {
-        if(element.canHandlerSite()){
-          return element;
-        }
+
+function getHandlerData(){
+  handlersArray.forEach(element => {
+    if(element.canHandlerSite()){
+      handler = element;
+    }
+  });
+}
+
+async function runAplication(){
+  waitForElementsById(handlersRootNames)
+  .then(async () => {
+    chrome.storage.sync.get("accepted", async function (data) {
+      preferences = data.accepted;
+      getHandlerData();
+      await configurateCookies(handler.getHostName(),preferences);
     });
+  })
+  .catch((error) => {
+      console.error("Error:", error);
+  });
+
+  
+  
 }
 //------------------------ INICIO ----------------------------------------------------------------
+var handler = new Handler();
+var handlerSetUp = new SetUp();
+var handlersArray = handlerSetUp.getAllHandlers();
+var handlersRootNames = handlerSetUp.getAllRootNames();
+var preferences = "";
 
-this.handlersObj = new SetUp();
-this.handlersArray = handlersObj.getAllHandlers();
-this.handlersRootNames = handlersObj.getAllRootNames();
+runAplication();
 
-//TIENES QUE SOLUCIONAAR LO DE PODER LLMAR A PREFERENCES Y HALDER EPR VA DE LOKOS
 
-waitForElementsById(handlersRootNames)
-    .then(async () => {
-      console.log("1");
-      this.preferences = await getCookiePreferences();
-      console.log("2");
-      this.handler = getPrivacyManager(handlersArray);
-      console.log("3");
-      this.console.log(this.preferences, this.handler)
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+
 
    
 
