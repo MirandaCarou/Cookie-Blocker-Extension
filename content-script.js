@@ -97,80 +97,18 @@ function clickElementWithClassName(className) {
 }
 
 //-------------- FUNCIONES DE LA EXTENSIÓN Y RELACIONADAS CON SU COMPORTAMIENTO ---------------------------------------------------------------
-async function checkConfigurationOptions(privacyApli){
-        switch(privacyApli) {
-            case "didomi":
-              if(document.getElementsByClassName('didomi-components-button didomi-button didomi-button-standard standard-button') !== undefined){
-                console.log(document.getElementsByClassName('didomi-components-button didomi-button didomi-button-standard standard-button')[0]);
-                setTimeout(() => {
-                  clickElementWithClassName(['didomi-components-button didomi-button didomi-button-standard standard-button']);
-                }, 1000);
-                console.log("Se le ha dado al boton de guardar preferencias");
-              } 
-              break;
-            case "onetrust":
-                if(document.getElementsByClassName('save-preference-btn-handler onetrust-close-btn-handler') !== undefined){
-                    console.log('save-preference-btn-handler onetrust-close-btn-handler');
-                    setTimeout(() => {
-                      clickElementWithClassName(['save-preference-btn-handler onetrust-close-btn-handler']);
-                    }, 1000);
-                    console.log("Se le ha dado al boton de guardar preferencias");
-                }
-                break;
-            default:
-                break;
-        }
-        
-}
-async function configurateCookies(privacyApli, preferences) {
+async function configurateCookies(handler, preferences) {
   console.log("-------------CONFIGURATE COOKIES --------------");
-  console.log(privacyApli);
+  console.log(handler.getHostName());
   console.log(preferences);
   console.log("-----------------------------------------------");
-    switch (privacyApli) {
-        case "didomi":
-            if(preferences == "acceptAll" ){
-                clickElementWithId(['didomi-notice-agree-button']);
-                console.log('Se han aeptado todas las cookies'); 
-            }else if(preferences == "denyAll"){
-                clickElementWithId(['didomi-notice-learn-more-button']);
-                setTimeout(() => {
-                  checkConfigurationOptions(privacyApli);
-                }, 1000);   
-            }
-            break;
-        case "onetrust":
-            if(preferences == "acceptAll"){
-                console.log('Se quieren aceptar todas las cookies'); 
-                clickElementWithId(["onetrust-accept-btn-handler"]);
-            }else if(preferences == "denyAll"){
-              if(document.getElementById('onetrust-reject-all-handler')){
-                console.log('Se quieren rechazar todas las cookies sin configurar');
-                clickElementWithId(['onetrust-reject-all-handler']);
-              }else{
-                console.log('Se van a ir a configurar las cookies');
-                clickElementWithId(['onetrust-pc-btn-handler']);
-                await checkConfigurationOptions(privacyApli);
+  if(preferences == 'acceptAll'){
+      handler.manageSiteAsAcceptAll();
+  }else if (preferences == "denyAll") {
+      handler.manageSiteAsDenyAll();
+  }
 
-              }
-            }
-            break;    
-        default:
-            break;
-    }
-    
 }
-async function checkForCookiePrefencesElement(preferences) { //esto migrado
-    if (document.getElementById('didomi-host')) {
-      console.log('Se ha detectado el uso de el gestor de privacidad DIDOMI');  
-      await configurateCookies("didomi",preferences);
-    }else if(document.getElementById('onetrust-consent-sdk')){
-      console.log('Se ha detectado el uso de el gestor de privacidad ONETRUST');  
-      await configurateCookies("onetrust",preferences);  
-    }
-}
-
-
 
 async function getCookiePreferences(){
     chrome.storage.sync.get("accepted", async function (data) {
@@ -194,7 +132,7 @@ async function runAplication(){
     chrome.storage.sync.get("accepted", async function (data) {
       preferences = data.accepted;
       getHandlerData();
-      await configurateCookies(handler.getHostName(),preferences);
+      await configurateCookies(handler,preferences);
     });
   })
   .catch((error) => {
@@ -212,7 +150,8 @@ var handlersRootNames = handlerSetUp.getAllRootNames();
 var preferences = "";
 
 runAplication();
-
+//ESTABAS APUNTO DE LLEVAR LA LOGICA DE ACCEPTAR TODO Y RECHAZAR TODO EN EL HANDLER 
+//AÑADIEDNO LOS WAITS Y LOS CLICK MIRA ESO
 
 
 

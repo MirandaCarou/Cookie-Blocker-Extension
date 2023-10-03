@@ -5,7 +5,7 @@ class Handler {
         this.rootName = "default";
         this.acceptAllId = "default";
         this.denyAllId = "default";
-        this.configurationClassName = "default"
+        this.configuration = "default"
         this.savePreferences = "default";
     }
     
@@ -21,13 +21,32 @@ class Handler {
         }else{
             return false;
         }
-    };
+    }
     manageSiteAsAcceptAll(){
-
-    };
+      clickElementWithId([this.acceptAllId]);
+      console.log('Se han aeptado todas las cookies'); 
+    }
     manageSiteAsDenyAll(){
+      if(document.getElementById( this.denyAllId)){
+        console.log('Se quieren rechazar todas las cookies sin configurar');
+        clickElementWithId([this.denyAllId]);
+      }else{
+        console.log('Se van a ir a configurar las cookies');
+        clickElementWithId([this.configuration]);
+        this.checkConfigurationOptions();
+      }
+    }
+    checkConfigurationOptions(){
 
-    };
+      if(document.getElementsByClassName(this.savePreferences) !== undefined){
+        console.log(document.getElementsByClassName(this.savePreferences)[0]);
+        setTimeout(() => {
+        clickElementWithClassName([this.savePreferences]);
+        }, 1000);
+        console.log("Se le ha dado al boton de guardar preferencias");
+      } 
+      
+    }
     clickElementWithId(id) {
         if(document.getElementById(id)){
           document.getElementById(id).click();

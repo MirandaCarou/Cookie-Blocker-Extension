@@ -7,8 +7,10 @@ class OneTrust extends Handler{
         this.rootName = 'onetrust-consent-sdk';
         this.acceptAllId = 'onetrust-accept-btn-handler';
         this.denyAllId = 'onetrust-reject-all-handler';
-        this.configurationClassName = 'onetrust-pc-btn-handler';
+        this.configuration = 'onetrust-pc-btn-handler';
         this.savePreferences = 'save-preference-btn-handler onetrust-close-btn-handler';
     }
+
+    
 }
 
