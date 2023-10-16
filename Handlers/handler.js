@@ -17,22 +17,23 @@ class Handler {
     }
     canHandlerSite(){
         if(document.getElementById(this.rootName)){
-            return true;
+          document.getElementById(this.rootName).style.visibility = "hidden";
+          return true;
         }else{
-            return false;
+          return false;
         }
     }
     manageSiteAsAcceptAll(){
-      clickElementWithId([this.acceptAllId]);
+      this.clickElementWithId([this.acceptAllId]);
       console.log('Se han aeptado todas las cookies'); 
     }
     manageSiteAsDenyAll(){
       if(document.getElementById( this.denyAllId)){
         console.log('Se quieren rechazar todas las cookies sin configurar');
-        clickElementWithId([this.denyAllId]);
+        this.clickElementWithId([this.denyAllId]);
       }else{
         console.log('Se van a ir a configurar las cookies');
-        clickElementWithId([this.configuration]);
+        this.clickElementWithId([this.configuration]);
         this.checkConfigurationOptions();
       }
     }
@@ -41,7 +42,7 @@ class Handler {
       if(document.getElementsByClassName(this.savePreferences) !== undefined){
         console.log(document.getElementsByClassName(this.savePreferences)[0]);
         setTimeout(() => {
-        clickElementWithClassName([this.savePreferences]);
+        this.clickElementWithClassName([this.savePreferences]);
         }, 1000);
         console.log("Se le ha dado al boton de guardar preferencias");
       } 
@@ -51,7 +52,7 @@ class Handler {
         if(document.getElementById(id)){
           document.getElementById(id).click();
         }else{
-          waitForElementById(id)
+          this.waitForElementById(id)
           .then(() => {
             document.getElementById(id).click();
           })
@@ -65,7 +66,7 @@ class Handler {
           console.log(document.getElementsByClassName(className)[0].click());
           document.getElementsByClassName(className)[0].click();
         }else{
-          waitForElementByClass(className)
+          this.waitForElementByClass(className)
           .then(() => {
             document.getElementsByClassName(className)[0].click();
           })
