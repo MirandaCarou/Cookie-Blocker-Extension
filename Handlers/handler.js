@@ -17,6 +17,7 @@ class Handler {
     }
     canHandlerSite(){
         if(document.getElementById(this.rootName)){
+          document.getElementById(this.rootName).style.display = "none";
           document.getElementById(this.rootName).style.visibility = "hidden";
           return true;
         }else{

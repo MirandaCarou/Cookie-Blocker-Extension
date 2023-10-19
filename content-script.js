@@ -32,14 +32,6 @@ async function configurateCookies(handler, preferences) {
 
 }
 
-async function getCookiePreferences(){
-    chrome.storage.sync.get("accepted", async function (data) {
-        console.log("The preference value is "+ data.accepted);
-        preferences = data.accepted;
-    });
-}
-
-
 function getHandlerData(){
   handlersArray.forEach(element => {
     if(element.canHandlerSite()){
