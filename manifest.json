@@ -23,7 +23,7 @@
   "content_scripts": [
     {
       "matches": ["https://*/*","http://*/*"],
-      "js": ["./Handlers/handler.js","./Handlers/didomi.js","./Handlers/oneTrust.js","content-script.js", "setUp.js"]
+      "js": ["./Handlers/handler.js","./Handlers/didomi.js","./Handlers/oneTrust.js","setUp.js","content-script.js" ]
     }
   ],
   "action": {
