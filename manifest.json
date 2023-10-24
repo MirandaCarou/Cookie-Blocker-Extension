@@ -21,7 +21,7 @@
   "content_scripts": [
     {
       "matches": ["https://*/*","http://*/*"],
-      "js": ["setUp.js","./Handlers/handler.js","./Handlers/didomi.js","./Handlers/oneTrust.js","./Handlers/cookieYes.js","./Handlers/cookieNotice.js","./content-script.js"]
+      "js": ["./Handlers/handler.js","./Handlers/didomi.js","./Handlers/oneTrust.js","./Handlers/cookieYes.js","./Handlers/cookieNotice.js","setUp.js","./content-script.js"]
     }
   ],
   "background": {

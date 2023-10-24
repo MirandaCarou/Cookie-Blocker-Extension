@@ -15,7 +15,7 @@ async function waitForElementsByIdorClassName(elements) {
       });
       observer.observe(document, { childList: true, subtree: true });
     });
-  }
+}
 
 
 //-------------- FUNCIONES DE LA EXTENSIÓN Y RELACIONADAS CON SU COMPORTAMIENTO ---------------------------------------------------------------
