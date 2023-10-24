@@ -1,6 +1,6 @@
 class SetUp{
     constructor(){
-        this.handlers = [new Didomi(), new OneTrust()];
+        this.handlers = [new Didomi(), new OneTrust(), new CookieYes(), new CookieNotice()];
         this.rootNames = [];
     }
 

@@ -1,13 +1,12 @@
 var installed = {};
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  if (installed[tabId] === undefined) {
-    //if (changeInfo.status === "loading" && tab.status === "loading") {
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab ){
     installed[tabId] = "yes";
-    chrome.scripting.executeScript({
-      target: { tabId: tabId },
-      files: ["content-script.js"]
-    });
-    
-    //}
-  }
+    if (installed[tabId] === undefined) {
+      chrome.scripting.executeScript({
+          target: { tabId: tabId },
+          files: ["content-script.js"]
+      });
+    }
 });
+
