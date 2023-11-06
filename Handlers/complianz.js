@@ -1,23 +1,13 @@
-class CookieYes extends Handler{
+class Complianz extends Handler{
     constructor(){
         super();
-        this.hostName = 'cookieYes';
-        this.rootName = 'cky-consent-container';
-        this.acceptAllId = 'cky-btn cky-btn-accept';
-        this.denyAllId = 'cky-btn cky-btn-reject';
-        this.configuration = 'cky-btn cky-btn-customize';
-        this.savePreferences = 'cky-btn cky-btn-preferences';
+        this.hostName = 'Complianz';
+        this.rootName = 'cmplz-cookiebanner-container';
+        this.acceptAllId = 'cmplz-btn cmplz-accept';
+        this.denyAllId = 'cmplz-btn cmplz-deny';
+        this.savePreferences = 'cmplz-btn cmplz-save-preferences';
     }
 
-    canHandlerSite(){
-        if(document.getElementsByClassName(this.rootName)[0]){
-          document.getElementsByClassName(this.rootName)[0].style.display = "none";
-          document.getElementsByClassName(this.rootName)[0].style.visibility = "hidden";
-          return true;
-        }else{
-          return false;
-        }
-    }
     manageSiteAsAcceptAll(){
       this.clickElementWithClassName([this.acceptAllId]);
       console.log('Se han aeptado todas las cookies'); 
@@ -28,8 +18,7 @@ class CookieYes extends Handler{
         this.clickElementWithClassName([this.denyAllId]);
       }else{
         console.log('Se van a ir a configurar las cookies');
-        this.clickElementWithClassName([this.configuration]);
-        this.checkConfigurationOptions();
+        this.clickElementWithClassName([this.savePreferences]);
       }
     }
     clickElementWithClassName(className) {
