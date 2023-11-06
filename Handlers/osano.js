@@ -1,12 +1,11 @@
-class CookieYes extends Handler{
+class Osano extends Handler{
     constructor(){
         super();
-        this.hostName = 'cookieYes';
-        this.rootName = 'cky-consent-container';
-        this.acceptAllId = 'cky-btn cky-btn-accept';
-        this.denyAllId = 'cky-btn cky-btn-reject';
-        this.configuration = 'cky-btn cky-btn-customize';
-        this.savePreferences = 'cky-btn cky-btn-preferences';
+        this.hostName = 'Osano';
+        this.rootName = 'osano-cm-window';
+        this.acceptAllId = 'osano-cm-accept-all osano-cm-buttons__button osano-cm-button osano-cm-button--type_accept';
+        this.denyAllId = 'osano-cm-denyAll osano-cm-buttons__button osano-cm-button osano-cm-button--type_denyAll';
+        this.savePreferences = 'osano-cm-save osano-cm-buttons__button osano-cm-button osano-cm-button--type_save';
     }
 
     getRootName(){
@@ -34,8 +33,7 @@ class CookieYes extends Handler{
         this.clickElementWithClassName([this.denyAllId]);
       }else{
         console.log('Se van a ir a configurar las cookies');
-        this.clickElementWithClassName([this.configuration]);
-        this.checkConfigurationOptions();
+        this.clickElementWithClassName([this.savePreferences]);
       }
     }
     clickElementWithClassName(className) {
