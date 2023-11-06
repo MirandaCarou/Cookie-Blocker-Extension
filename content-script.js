@@ -1,21 +1,21 @@
 
 
 //------------------ FUNCIONES QUE SE UTILIZAN (AJENAS A LA EXTENSION)------------------------------------------------------
-async function waitForElementsById(elementIds) {
-    return new Promise((resolve) => {
+async function waitForElementsByIdorClassName(elements) {
+    return new Promise(async (resolve, reject) => {
       const observer = new MutationObserver(() => {
-          for (const elementId of elementIds) {
-            const targetElement = document.getElementById(elementId);
-            if (targetElement) {
+          for (const element of elements) {
+            const targetElement = document.getElementById(element) ?? document.getElementsByClassName(element)[0];
+            if (targetElement != undefined) {
               observer.disconnect();
+              elementDetected = true;
               resolve();
             }
           }
       });
-  
       observer.observe(document, { childList: true, subtree: true });
     });
-  }
+}
 
 
 //-------------- FUNCIONES DE LA EXTENSIÓN Y RELACIONADAS CON SU COMPORTAMIENTO ---------------------------------------------------------------
@@ -33,15 +33,21 @@ async function configurateCookies(handler, preferences) {
 }
 
 function getHandlerData(){
+  var found = false;
   handlersArray.forEach(element => {
-    if(element.canHandlerSite()){
+    if(!found && element.canHandlerSite()){
       handler = element;
+      found = true;
     }
   });
 }
 
 async function runAplication(){
-  waitForElementsById(handlersRootNames)
+  handlerSetUp = new SetUp();
+  handlersArray = handlerSetUp.getAllHandlers();
+  handlersRootNames = handlerSetUp.getAllRootNames();
+  handler = new Handler();
+  waitForElementsByIdorClassName(handlersRootNames)
   .then(async () => {
     chrome.storage.sync.get("accepted", async function (data) {
       preferences = data.accepted;
@@ -50,18 +56,14 @@ async function runAplication(){
     });
   })
   .catch((error) => {
-      console.error("Error:", error);
+      runAplication();
   });
 
   
   
 }
 //------------------------ INICIO ----------------------------------------------------------------
-var handler = new Handler();
-var handlerSetUp = new SetUp();
-var handlersArray = handlerSetUp.getAllHandlers();
-var handlersRootNames = handlerSetUp.getAllRootNames();
-var preferences = "";
+
 
 runAplication();
 
