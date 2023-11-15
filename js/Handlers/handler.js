@@ -26,14 +26,11 @@ class Handler {
     }
     manageSiteAsAcceptAll(){
       this.clickElementWithId([this.acceptAllId]);
-      console.log('Se han aeptado todas las cookies'); 
     }
     manageSiteAsDenyAll(){
       if(document.getElementById( this.denyAllId)){
-        console.log('Se quieren rechazar todas las cookies sin configurar');
         this.clickElementWithId([this.denyAllId]);
       }else{
-        console.log('Se van a ir a configurar las cookies');
         this.clickElementWithId([this.configuration]);
         this.checkConfigurationOptions();
       }
@@ -44,7 +41,6 @@ class Handler {
         setTimeout(() => {
         this.clickElementWithClassName([this.savePreferences]);
         }, 1000);
-        console.log("Se le ha dado al boton de guardar preferencias");
       } 
       
     }
@@ -57,7 +53,7 @@ class Handler {
             document.getElementById(id).click();
           })
           .catch((error) => {
-            console.error("Error:", error);
+            console.error("Error clicking in the element:", error);
           });
         }
       }
@@ -70,13 +66,22 @@ class Handler {
             document.getElementsByClassName(className)[0].click();
           })
           .catch((error) => {
-            console.error("Error:", error);
+            console.error("Error clicking in the element:", error);
           });
         }
           
     }
     waitForElementsById(elementIds) {
-        return new Promise((resolve) => {
+      return new Promise( (resolve, reject) => {
+        var elementDetected = false;
+        for (const element of elementIds) {
+          const targetElement = document.getElementById(element);
+          if (targetElement != undefined) {
+            elementDetected = true;
+            resolve();
+          }
+        }
+        if (!elementDetected) {
           const observer = new MutationObserver(() => {
               for (const elementId of elementIds) {
                 const targetElement = document.getElementById(elementId);
@@ -86,27 +91,36 @@ class Handler {
                 }
               }
           });
-      
-          observer.observe(document, { childList: true, subtree: true });
-        });
-      }
+        observer.observe(document, { childList: true, subtree: true });
+        }
+      });
+    }
     
-     waitForElementsByClass(elementClasses) {
-        return new Promise((resolve) => {
+    waitForElementsByClass(elementClasses) {
+      return new Promise( (resolve, reject) => {
+        var elementDetected = false;
+        for (const element of elementClasses) {
+          const targetElement = document.getElementsByClassName(element)[0];
+          if (targetElement != undefined) {
+            elementDetected = true;
+            resolve();
+          }
+        }
+        if (!elementDetected) {
           const observer = new MutationObserver(() => {
               for (const elementClass of elementClasses) {
-                const targetElements = document.getElementsByClassName(elementClass);
+                const targetElements = document.getElementsByClassName(elementClass)[0];
                 if (targetElements) {
                   observer.disconnect();
                   resolve();
                 }else{
-                  console.log('Se esta esperando');
                 }
               }
           });
           observer.observe(document, { childList: true, subtree: true });
-        });
-      }
+        }
+      });
+    }
 }
 
 

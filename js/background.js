@@ -5,7 +5,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab ){
       installed[tabId] = "yes";
       chrome.scripting.executeScript({
           target: { tabId: tabId },
-          files: ["content-script.js"]
+          files: ["/js/content-script.js"]
       });
     }
 });

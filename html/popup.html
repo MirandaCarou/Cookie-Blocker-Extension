@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Extension de bloqueo de cookies</title>
+  <link rel="stylesheet" href="/css/popup.css">
+  <script src="/js/popup.js"></script>
+</head>
+<body>
+  <div id="cookieBox">
+    <div id="cookieHeader">
+      <h2>CookieCntrl</h2>
+      <h2>CookieCntrl</h2>
+    </div>
+    <hr>
+    <div id="cookieOptions">
+      <div id="cookieSubstitle">
+        <span data-section="extension" data-value="cookieSubstitle">¿Cómo desea tratar las cookies?</span>
+      </div>
+      <div class="cookieSwitch">
+        <label class="switch">
+          <input type="checkbox" value="true" id="accept">
+          <span class="slider round"></span>
+        </label>
+        <span class="cookieMsgOption"  data-section="extension" data-value="cookieMsgOption1">Aceptarlas Todas</span>
+      </div>
+      <div class="cookieSwitch">
+        <label class="switch">
+          <input type="checkbox" value="false" id="reject"> 
+          <span class="slider round"></span>
+        </label>
+        <span class="cookieMsgOption"data-section="extension" data-value="cookieMsgOption2">Rechazar Todas</span>
+      </div>
+      <div class="cookieSwitch">
+        <label class="switch">
+          <input type="checkbox" value="false" id="doNothing"> 
+          <span class="slider round"></span>
+        </label>
+        <span class="cookieMsgOption"data-section="extension" data-value="cookieMsgOption3">No hacer nada</span>
+      </div>
+      </div>
+    </div>
+    <div id="cookieLanguage" class="cookieLanguage">
+      <button class="dropbtn lang" data-language="es"><img src="../icons/españa.jpg" alt="Spanish"></button>
+      <button class="dropbtn lang" data-language="en"><img src="../icons/inglesa.jpg" alt="Engish"></button>
+      <button class="dropbtn lang" data-language="gal"><img src="../icons/galicia.png" alt="Galician"></button>
+    </div>
+  </div>
+  
+</body>
+</html>
