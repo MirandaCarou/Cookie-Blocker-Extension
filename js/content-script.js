@@ -2,8 +2,18 @@
 
 //------------------ FUNCIONES QUE SE UTILIZAN (AJENAS A LA EXTENSION)------------------------------------------------------
 async function waitForElementsByIdorClassName(elements) {
-    return new Promise(async (resolve, reject) => {
+  return new Promise( (resolve, reject) => {
+    var elementDetected = false;
+    for (const element of elements) {
+      const targetElement = document.getElementById(element) ?? document.getElementsByClassName(element)[0];
+      if (targetElement != undefined) {
+        elementDetected = true;
+        resolve();
+      }
+    }
+    if (!elementDetected) {
       const observer = new MutationObserver(() => {
+          
           for (const element of elements) {
             const targetElement = document.getElementById(element) ?? document.getElementsByClassName(element)[0];
             if (targetElement != undefined) {
@@ -14,20 +24,17 @@ async function waitForElementsByIdorClassName(elements) {
           }
       });
       observer.observe(document, { childList: true, subtree: true });
-    });
+    }
+  });
 }
 
 
 //-------------- FUNCIONES DE LA EXTENSIÓN Y RELACIONADAS CON SU COMPORTAMIENTO ---------------------------------------------------------------
 async function configurateCookies(handler, preferences) {
-  console.log("-------------CONFIGURATE COOKIES --------------");
-  console.log(handler.getHostName());
-  console.log(preferences);
-  console.log("-----------------------------------------------");
   if(preferences == 'acceptAll'){
-      handler.manageSiteAsAcceptAll();
+    handler.manageSiteAsAcceptAll();
   }else if (preferences == "denyAll") {
-      handler.manageSiteAsDenyAll();
+    handler.manageSiteAsDenyAll();
   }
 
 }
@@ -50,6 +57,9 @@ async function runAplication(){
   waitForElementsByIdorClassName(handlersRootNames)
   .then(async () => {
     chrome.storage.sync.get("accepted", async function (data) {
+      if (data.accepted === undefined) {
+        data.accepted = "doNothing";
+      }
       preferences = data.accepted;
       getHandlerData();
       await configurateCookies(handler,preferences);

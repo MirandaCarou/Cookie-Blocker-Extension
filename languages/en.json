@@ -1,0 +1,8 @@
+{
+    "extension":{
+        "cookieSubstitle" : "How do you want to treat cookies?",
+        "cookieMsgOption1" : "Accept All",
+        "cookieMsgOption2" : "Reject All",
+        "cookieMsgOption3" : "Do Nothing"
+    }
+}
