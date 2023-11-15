@@ -50,3 +50,8 @@ Please adhere to this project's code of conduct.
 
 If you have any feedback, please reach out to me at mclainho19@esei.uvigo.es 
 
+## Authors
+
+- [Miranda Carou Laiño ](https://github.com/MirandaCarou)
+
+
