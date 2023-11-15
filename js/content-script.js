@@ -13,7 +13,6 @@ async function waitForElementsByIdorClassName(elements) {
     }
     if (!elementDetected) {
       const observer = new MutationObserver(() => {
-          
           for (const element of elements) {
             const targetElement = document.getElementById(element) ?? document.getElementsByClassName(element)[0];
             if (targetElement != undefined) {
@@ -66,7 +65,7 @@ async function runAplication(){
     });
   })
   .catch((error) => {
-      runAplication();
+    console.error("Error:", error);
   });
 
   
