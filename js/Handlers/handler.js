@@ -113,7 +113,6 @@ class Handler {
                 if (targetElements) {
                   observer.disconnect();
                   resolve();
-                }else{
                 }
               }
           });

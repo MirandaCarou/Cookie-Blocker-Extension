@@ -23,19 +23,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     // Escucha el evento click para los botones de aceptar y rechazar
     acceptRadio.addEventListener("click", function () {
-        chrome.storage.sync.set({ accepted: "acceptAll" })
+        chrome.storage.sync.set({ accepted: "acceptAll" });
+        console.log("se le dio al click de aceptar");
 		rejectRadio.checked = false;
 		doNothingRadio.checked = false;
     });
 
     rejectRadio.addEventListener("click", function () {
         chrome.storage.sync.set({ accepted : "denyAll" });
+        console.log("se le dio al click de rechazar");
 		acceptRadio.checked = false;
 		doNothingRadio.checked = false;
     });
 
 	doNothingRadio.addEventListener("click", function () {
-        chrome.storage.sync.set({ accepted : "" });
+        chrome.storage.sync.set({ accepted : "doNothing" });
+        console.log("se le dio al click de hacer nada");
 		acceptRadio.checked = false;
 		rejectRadio.checked = false;
     });
@@ -47,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
         for(const textToChange of textsToChange){
             const section = textToChange.dataset.section;
             const value = textToChange.dataset.value;
-            textToChange.innerHTML = texts[section][value];
+            textToChange.textContent = texts[section][value];
         }
     };
     lenguagesElements.addEventListener("click", (e) => {

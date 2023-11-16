@@ -4,7 +4,7 @@
   "manifest_version": 3,
   "description": "Bloquea cookies no esenciales",
   "icons": {
-    "128": "./icons/cookie.png"
+    "128": "./icons/cookie128.png"
   },
   "permissions": [
     "webNavigation",
@@ -40,10 +40,10 @@
   "action": {
     "default_popup": "./html/popup.html",
     "default_icon": {
-      "16": "./icons/cookie.png",
-      "32": "./icons/cookie.png",
-      "48": "./icons/cookie.png",
-      "128": "./icons/cookie.png"
+      "16": "./icons/cookie16.png",
+      "32": "./icons/cookie32.png",
+      "48": "./icons/cookie48.png",
+      "128": "./icons/cookie128.png"
     }
   }
 }
