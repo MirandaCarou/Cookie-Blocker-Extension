@@ -35,7 +35,25 @@ This is an open source project that provides a framework structure that allows f
 ## Deployment
 
 
+## Documentation
 
+[Bacherol´s Thesis](https://linktodocumentation) 👩‍🎓
+
+[Api Google Chrome Extension](https://developer.chrome.com/docs/extensions/mv3/)
+
+[Web Tech Survey](https://webtechsurvey.com/technology-type/cookie-compliance) 👾
+
+[CookieYes](https://www.cookieyes.com/es/) 👻
+
+[CookieNotice](https://wordpress.org/plugins/cookie-notice/) 👺
+
+[Osano](https://www.osano.com/) 👹
+
+[Complianz](https://complianz.io/) 🤖
+
+[Onetrust](https://www.onetrust.es/) 👽
+
+[Didomi](https://www.didomi.io/) 💀
 
 ## Contributing
 
