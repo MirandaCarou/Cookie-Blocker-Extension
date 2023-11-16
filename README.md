@@ -7,7 +7,7 @@ A Chrome extension for cookie control that allows the user to manage the use of 
 
     1. Complianz
     2. CookieNotice.
-    3.  CookieYes.
+    3. CookieYes.
     4. Didomi.
     5. OneTrust.
     6. Osano
