@@ -23,7 +23,7 @@ This is an open source project that provides a framework structure that allows f
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/MirandaCarou/Cookie-Blocker-Extension/graphs/commit-activity)
 
-[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)]([https://github.com/MirandaCarou/AMA])
+[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://github.com/MirandaCarou/AMA)
 
 [![JavaScript](https://img.shields.io/badge/--F7DF1E?logo=javascript&logoColor=000)](https://www.javascript.com/)
 
