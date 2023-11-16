@@ -31,6 +31,9 @@ This is an open source project that provides a framework structure that allows f
 
 
 
+## Screenshots
+
+<img src="./icons/CapturaExrensionChrome.png" width="400" height=400> <img src="./icons/CapturaExtension2.png" width="400" height=400>
 
 ## Deployment
 
