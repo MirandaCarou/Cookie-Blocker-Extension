@@ -1,5 +1,5 @@
 class Handler {
-
+  
     constructor(){ 
         this.hostName = "default";
         this.rootName = "default";
