@@ -35,7 +35,7 @@ https://github.com/MirandaCarou/Cookie-Blocker-Extension/assets/71145273/edbdad4
 
 <img src="./icons/CapturaExrensionChrome.png" width="400" height=400> <img src="./icons/CapturaExtension2.png" width="400" height=400>
 
-## Deployment
+## Deployment 👷‍♀
 
 No prerequisites other than a text editor and **Google Chrome** are required. 
 
