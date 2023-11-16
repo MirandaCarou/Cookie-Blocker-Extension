@@ -29,11 +29,7 @@ This is an open source project that provides a framework structure that allows f
 
 ## Demo
 
-
-
-
-
-https://github.com/MirandaCarou/Cookie-Blocker-Extension/blob/main/demos/demo1.mp4
+https://github.com/MirandaCarou/Cookie-Blocker-Extension/assets/71145273/edbdad46-e548-4847-95f7-e2174b8cd93d
 
 ## Screenshots
 
