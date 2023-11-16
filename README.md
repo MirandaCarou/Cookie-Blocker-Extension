@@ -42,7 +42,7 @@ No prerequisites other than a text editor and **Google Chrome** are required.
 Once you have copied the repository locally (in case you just want to test it you just have to access this url -> <-) to test future changes you should: 
 
   1. We go to the extensions section, or we put in the address bar chrome://extensions/ and on the top right side we activate the developer mode.
-  2. Then click on the unzipped load button.
+  2. Then click on the unzipped load button. 📦
   3. Select the folder where we have our files.
      
   ![añadirExtension](https://github.com/MirandaCarou/Cookie-Blocker-Extension/assets/71145273/315500d9-f11f-48f9-97f8-93b7f4f93791)
