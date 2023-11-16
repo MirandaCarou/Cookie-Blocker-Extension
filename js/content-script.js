@@ -56,23 +56,19 @@ async function runAplication(){
   waitForElementsByIdorClassName(handlersRootNames)
   .then(async () => {
     chrome.storage.sync.get("accepted", async function (data) {
-      if (data.accepted === undefined) {
+      if (data.accepted === undefined || data.accepted == "doNothing") {
         data.accepted = "doNothing";
+      }else{
+        preferences = data.accepted;
+        getHandlerData();
+        await configurateCookies(handler,preferences);
       }
-      preferences = data.accepted;
-      getHandlerData();
-      await configurateCookies(handler,preferences);
     });
   })
   .catch((error) => {
     console.error("Error:", error);
-  });
-
-  
-  
+  });  
 }
-//------------------------ INICIO ----------------------------------------------------------------
-
 
 runAplication();
 
