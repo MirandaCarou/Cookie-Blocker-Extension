@@ -62,7 +62,7 @@ https://github.com/MirandaCarou/Cookie-Blocker-Extension/assets/71145273/edbdad4
 
 Contributions are always welcome!
 
-See contributing.md for ways to get started.
+See [contributing.md](https://github.com/MirandaCarou/Cookie-Blocker-Extension/blob/main/CONTRIBUTING.md) for ways to get started.
 
 Please adhere to this project's code of conduct.
 
