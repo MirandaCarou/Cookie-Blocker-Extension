@@ -68,6 +68,63 @@ Once you have copied the repository locally (in case you just want to test it yo
 
 [Didomi](https://www.didomi.io/) 💀
 
+This project has the following folder structure: 🌳🌲
+
+```bash
+  D:.
+│   .gitattributes
+│   CONTRIBUTING.md
+│   diagram.txt
+│   LICENSE.txt
+│   manifest.json
+│   README.md
+│   SECURITY.md
+│   
+├───css
+│       popup.css
+│       
+├───demos
+│       2023-11-16 21-09-21.mkv
+│       demo1.mp4
+│       
+├───html
+│       popup.html
+│       
+├───icons
+│       CapturaExrensionChrome.png
+│       CapturaExtension2.png
+│       cookie.png
+│       cookie128.png
+│       cookie16.png
+│       cookie32.png
+│       cookie48.png
+│       españa.jpg
+│       formalLogo.png
+│       galicia.png
+│       inglesa.jpg
+│       language.png
+│       
+├───js
+│   │   background.js
+│   │   content-script.js
+│   │   popup.js
+│   │   setUp.js
+│   │   
+│   └───Handlers
+│           complianz.js
+│           cookieNotice.js
+│           cookieYes.js
+│           didomi.js
+│           handler.js
+│           oneTrust.js
+│           osano.js
+│           
+└───languages
+        en.json
+        es.json
+        gal.json
+```
+
 ## Contributing
 
 Contributions are always welcome!
