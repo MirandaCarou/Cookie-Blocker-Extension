@@ -7,12 +7,9 @@
     "128": "./icons/cookie128.png"
   },
   "permissions": [
-    "webNavigation",
-    "cookies",
     "scripting",
     "activeTab",
-    "storage",
-    "tabs"
+    "storage"
   ],
   "host_permissions": [
     "https://*/*",
